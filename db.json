@@ -1,0 +1,28 @@
+{
+  "clients": [
+    {
+      "name": "ivan",
+      "company": "ivan corp",
+      "email": "ivanlopezisw@gmail.com",
+      "phone": "6222289135",
+      "notes": "Cliente recomendado por otro.",
+      "id": 1
+    },
+    {
+      "name": "Quentin",
+      "company": "Quentin corp",
+      "email": "quentin@gmail.com",
+      "phone": "6222289135",
+      "notes": "El Quentin anda pidiendo comida",
+      "id": 2
+    },
+    {
+      "name": "paulina",
+      "company": "paulina construcciones",
+      "email": "paulina@gmail.com",
+      "phone": "6222289135",
+      "notes": "paulina",
+      "id": 3
+    }
+  ]
+}
