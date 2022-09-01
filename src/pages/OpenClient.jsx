@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Spinner from "../components/Spinner";
 
@@ -11,22 +11,25 @@ const OpenClient = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    setLoading(!loading);
     const getClientAPI = async () => {
       try {
+        setLoading(true);
         const url = `http://localhost:4000/clients/${id}`;
         const response = await fetch(url);
         const result = await response.json();
         setClient(result);
+
+        // forced loading
+        setTimeout(() => {
+          setLoading(false);
+        }, 600);
       } catch (error) {
         console.log(error);
       }
-      setLoading(false);
     };
+
     getClientAPI();
   }, []);
-
-  console.log(loading);
 
   return loading ? (
     <Spinner />
@@ -77,7 +80,6 @@ const OpenClient = () => {
           </p>
         )}
       </>
-      )
     </div>
   );
 };

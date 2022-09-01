@@ -21,6 +21,7 @@ const Client = ({ client }) => {
 
       <td className="p-3">{company}</td>
       <td className="p-3">
+        {/* Client Button */}
         <button
           type="button"
           className="bg-yellow-500 hover:bg-yellow-600 block w-full text-white p-2 uppercase font-bold text-xs"
@@ -28,12 +29,17 @@ const Client = ({ client }) => {
         >
           Open
         </button>
+
+        {/* Edit Button */}
         <button
           type="button"
           className="bg-blue-600 hover:bg-blue-700 block w-full text-white p-2 uppercase font-bold text-xs mt-3"
+          onClick={() => navigate(`/clients/edit/${id}`)}
         >
           Edit
         </button>
+
+        {/* Delete Button */}
         <button
           type="button"
           className="bg-red-600 hover:bg-red-700 block w-full text-white p-2 uppercase font-bold text-xs mt-3"

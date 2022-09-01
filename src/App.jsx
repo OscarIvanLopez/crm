@@ -14,7 +14,7 @@ const App = () => {
         <Route path="/clients" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="new" element={<NewClient />} />
-          <Route path="edit:id" element={<EditClient />} />
+          <Route path="edit/:id" element={<EditClient />} />
           <Route path=":id" element={<OpenClient />} />
         </Route>
       </Routes>

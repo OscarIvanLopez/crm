@@ -3,8 +3,9 @@ import { Formik, Form as FormikForm, Field } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import Alert from "./Alert";
+import Spinner from "./Spinner";
 
-const Form = () => {
+const Form = ({ client, loading }) => {
   const navigate = useNavigate();
   const newClientSchema = Yup.object().shape({
     name: Yup.string()
@@ -21,10 +22,10 @@ const Form = () => {
       .typeError("Invalid Number"),
   });
 
-  const handleSubmit = async (values) => {
+  // hold this please
+  const getClientAPI = async () => {
     try {
-      const url = "http://localhost:4000/clients";
-
+      const url = `http://localhost:4000/clients`;
       const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify(values),
@@ -34,7 +35,6 @@ const Form = () => {
       });
 
       console.log(response);
-
       const result = await response.json();
       console.log(result);
 
@@ -44,24 +44,63 @@ const Form = () => {
     }
   };
 
-  return (
+  getClientAPI();
+
+  const handleSubmit = async (values) => {
+    try {
+      let response;
+      if (client.id) {
+        // Edit registered user
+        const url = `http://localhost:4000/clients/${client.id}`;
+        response = await fetch(url, {
+          method: "PUT",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      } else {
+        // New register
+        const url = `http://localhost:4000/clients`;
+        response = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+      }
+
+      console.log(response);
+      await response.json();
+
+      navigate("/clients");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return loading ? (
+    <Spinner />
+  ) : (
     <div className="bg-white mt-10 px-5 py-10 rounded-md shadow-md md:w-3/4 mx-auto">
       <h1 className="text-gray-600 font-bold text-xl uppercase text-center">
-        Add Client
+        {client?.name ? "Edit Client" : "Add Client"}
       </h1>
       <Formik
         initialValues={{
-          name: "",
-          company: "",
-          email: "",
-          phone: "",
-          notes: "",
+          name: client?.name ?? "",
+          company: client?.company ?? "",
+          email: client?.email ?? "",
+          phone: client?.phone ?? "",
+          notes: client?.notes ?? "",
         }}
         onSubmit={async (values, { resetForm }) => {
           await handleSubmit(values);
 
           resetForm();
         }}
+        enableReinitialize={true}
         validationSchema={newClientSchema}
       >
         {({ errors, touched }) => {
@@ -149,7 +188,7 @@ const Form = () => {
 
               <input
                 type="submit"
-                value="Add Client"
+                value={client?.name ? "Edit Client" : "Add Client"}
                 className="mt-5 w-full bg-blue-800 p-3 text-white uppercase font-bold text-lg"
               />
             </FormikForm>
@@ -158,6 +197,11 @@ const Form = () => {
       </Formik>
     </div>
   );
+};
+
+Form.defaultProps = {
+  client: {},
+  loading: {},
 };
 
 export default Form;

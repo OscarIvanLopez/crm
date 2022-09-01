@@ -1,7 +1,7 @@
 {
   "clients": [
     {
-      "name": "ivan",
+      "name": "ivan lopez",
       "company": "ivan corp",
       "email": "ivanlopezisw@gmail.com",
       "phone": "6222289135",
@@ -23,6 +23,22 @@
       "phone": "6222289135",
       "notes": "paulina",
       "id": 3
+    },
+    {
+      "name": "test",
+      "company": "test company",
+      "email": "test@gmail.com",
+      "phone": "6222289135",
+      "notes": "this is a test note",
+      "id": 4
+    },
+    {
+      "name": "new client test",
+      "company": "new client test company",
+      "email": "testAccount@gmail.com",
+      "phone": "6222289135",
+      "notes": "This is a test note\nchange test",
+      "id": 5
     }
   ]
 }

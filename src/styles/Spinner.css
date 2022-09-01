@@ -5,6 +5,7 @@
   position: relative;
   -webkit-transform: rotateZ(45deg);
   transform: rotateZ(45deg);
+  margin: 0 auto;
 }
 
 .sk-folding-cube .sk-cube {
