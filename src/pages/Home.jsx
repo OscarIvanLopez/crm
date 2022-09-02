@@ -20,6 +20,29 @@ const Home = () => {
     getClientsAPI();
   }, []);
 
+  const handleDelete = async (id) => {
+    // confirm message
+    const confirmDelete = confirm("Do you want to delete this client?");
+
+    if (confirmDelete) {
+      try {
+        // request to delete client
+        const url = `http://localhost:4000/clients/${id}`;
+        const result = fetch(url, {
+          method: "DELETE",
+        });
+
+        await result.json();
+
+        // re-consult all clients
+        const arrayClients = clients.filter((client) => client.id !== id);
+        setClients(arrayClients);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <>
       <h1 className="font-black text-4xl text-blue-900">Clients</h1>
@@ -37,7 +60,11 @@ const Home = () => {
 
         <tbody>
           {clients.map((client) => (
-            <Client key={client.id} client={client} />
+            <Client
+              key={client.id}
+              client={client}
+              handleDelete={handleDelete}
+            />
           ))}
         </tbody>
       </table>

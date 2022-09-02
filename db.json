@@ -31,14 +31,6 @@
       "phone": "6222289135",
       "notes": "this is a test note",
       "id": 4
-    },
-    {
-      "name": "new client test",
-      "company": "new client test company",
-      "email": "testAccount@gmail.com",
-      "phone": "6222289135",
-      "notes": "This is a test note\nchange test",
-      "id": 5
     }
   ]
 }
