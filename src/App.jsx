@@ -7,6 +7,8 @@ import EditClient from "./pages/EditClient";
 import OpenClient from "./pages/OpenClient";
 
 const App = () => {
+  console.log(import.meta.env.VITE_API_URL);
+
   return (
     <BrowserRouter>
       <Routes>

@@ -25,7 +25,7 @@ const Form = ({ client, loading }) => {
   // hold this please
   const getClientAPI = async () => {
     try {
-      const url = `http://localhost:4000/clients`;
+      const url = import.meta.env.VITE_API_URL;
       const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify(values),
@@ -51,7 +51,7 @@ const Form = ({ client, loading }) => {
       let response;
       if (client.id) {
         // Edit registered user
-        const url = `http://localhost:4000/clients/${client.id}`;
+        const url = import.meta.env.VITE_API_URL;
         response = await fetch(url, {
           method: "PUT",
           body: JSON.stringify(values),
@@ -61,7 +61,7 @@ const Form = ({ client, loading }) => {
         });
       } else {
         // New register
-        const url = `http://localhost:4000/clients`;
+        const url = import.meta.env.VITE_API_URL;
         response = await fetch(url, {
           method: "POST",
           body: JSON.stringify(values),
